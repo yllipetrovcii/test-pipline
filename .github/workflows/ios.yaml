@@ -61,7 +61,7 @@ jobs:
       - name: install Cocoapod dependencies
         run: |
              cd ios
-             NO_FLIPPER=1 pod install
+             pod install
              
              
 
