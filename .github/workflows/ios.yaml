@@ -46,6 +46,10 @@ jobs:
       - name: xcode identity
         run: |
           security find-identity -v -p codesigning
+      - name: Find provision profile
+        run: |
+          cat ~/Library/MobileDevice/Provisioning\ Profiles  
+         
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
