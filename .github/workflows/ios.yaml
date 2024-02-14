@@ -82,11 +82,10 @@ jobs:
       - name: build archive
         run: |
              cd ios
-             xcodebuild PROVISIONING_PROFILE="" -workspace bps.xcworkspace \
+             xcodebuild  -workspace bps.xcworkspace \
              -scheme "bps" \
              -sdk iphoneos \
              -configuration Debug \
-             -allowProvisioningUpdates \
              -destination generic/platform=iOS \
              -archivePath $RUNNER_TEMP/bps.xcarchive \
              archive
