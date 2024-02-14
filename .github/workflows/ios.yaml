@@ -48,8 +48,8 @@ jobs:
           security find-identity -v -p codesigning
       - name: Find provision profile
         run: |
-          cat ~/Library/MobileDevice/Provisioning\ Profiles  
-         
+          cd ~/Library/MobileDevice/Provisioning\ Profiles ls
+          
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
