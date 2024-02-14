@@ -42,7 +42,10 @@ jobs:
 
           # apply provisioning profile
           mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
-          cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles      
+          cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles     
+      - uses: nickwph/apple-provisioning-profile-action@v1
+        with:
+          profile-base64:  ${{ secrets.BUILD_PROVISION_PROFILE_BASE64 }}
       - name: xcode identity
         run: |
           security find-identity -v -p codesigning
