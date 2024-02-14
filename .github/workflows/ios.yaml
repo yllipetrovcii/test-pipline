@@ -16,6 +16,7 @@ jobs:
       - name: ruby version
         run: ruby --version
       - name: Install the Apple certificate and provisioning profile
+        id: profile
         env:
           BUILD_CERTIFICATE_BASE64: ${{ secrets.BUILD_CERTIFICATE_BASE64 }}
           P12_PASSWORD: ${{ secrets.P12_PASSWORD }}
@@ -81,7 +82,7 @@ jobs:
       - name: build archive
         run: |
              cd ios
-             xcodebuild -workspace PROVISIONING_PROFILE=${{ steps.profile.outputs.uuid }} bps.xcworkspace \
+             xcodebuild PROVISIONING_PROFILE=${{ steps.profile.outputs.uuid }} -workspace bps.xcworkspace \
              -scheme "bps" \
              -sdk iphoneos \
              -configuration Debug \
