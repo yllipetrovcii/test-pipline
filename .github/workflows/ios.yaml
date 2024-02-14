@@ -82,7 +82,7 @@ jobs:
       - name: build archive
         run: |
              cd ios
-             xcodebuild PROVISIONING_PROFILE=${{ steps.profile.outputs.uuid }} -workspace bps.xcworkspace \
+             xcodebuild PROVISIONING_PROFILE="" -workspace bps.xcworkspace \
              -scheme "bps" \
              -sdk iphoneos \
              -configuration Debug \
