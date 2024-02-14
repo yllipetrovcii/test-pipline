@@ -86,6 +86,7 @@ jobs:
              -scheme "bps" \
              -sdk iphoneos \
              -configuration Debug \
+             -allowProvisioningUpdates \
              -destination generic/platform=iOS \
              -archivePath $RUNNER_TEMP/bps.xcarchive \
              archive
