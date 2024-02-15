@@ -15,6 +15,11 @@ jobs:
         uses: actions/checkout@v4
       - name: ruby version
         run: ruby --version
+      - name: echo .plist
+        run: |
+          EXPORT_OPTS_PATH=$RUNNER_TEMP/ExportOptions.plist
+          echo "$EXPORT_OPTIONS_PLIST" > $EXPORT_OPTS_PATH
+          cat $EXPORT_OPTS_PATH
       - name: Install the Apple certificate and provisioning profile
         id: profile
         env:
