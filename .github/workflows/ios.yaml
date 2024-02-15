@@ -50,20 +50,12 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-
-      - name: Cache Yarn dependencies
-        uses: actions/cache@v2
-        with:
-          path: |
-            ~/.cache/yarn
-            node_modules
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
+          cache: 'npm'
+          cache-dependency-path: ./package-lock.json
           
-      - name: Run Yarn Install
+      - name: npm Yarn Install
         run: |
-             yarn install
+             npm install
       - name: Cache Pods
         uses: actions/cache@v3
         id: pods-cache
