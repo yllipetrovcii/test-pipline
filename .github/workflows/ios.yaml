@@ -13,11 +13,6 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-      - name: EXPORTTTT
-        run: | 
-          EXPORT_OPTS_PATH=$RUNNER_TEMP/ExportOptions.plist
-          echo "${{ vars.EXPORT_OPTIONS_PLIST }}" > $EXPORT_OPTS_PATH
-          cat $EXPORT_OPTS_PATH
       - name: Install the Apple certificate and provisioning profile
         id: profile
         env:
@@ -52,34 +47,24 @@ jobs:
       - uses: nickwph/apple-provisioning-profile-action@v1
         with:
           profile-base64:  ${{ secrets.BUILD_PROVISION_PROFILE_BASE64 }}
-      - name: xcode identity
-        run: |
-          security find-identity -v -p codesigning
-      - name: Find provision profile
-        run: |
-          cd ~/Library/MobileDevice/Provisioning\ Profiles ls
-          
-      - name: Setup Node
-        uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: 20
+          cache: 'yarn'
       - name: Run Yarn Install
         run: |
              yarn install
-    
-      
-      - name: Verify CocoaPods Uninstallation
-        run: |
-          pod --version
-          gem list | grep cocoapods
-  
+      - name: Cache Pods
+        uses: actions/cache@v3
+        id: pods-cache
+        with:
+         path: ./ios/Pods
+         key: ${{ runner.os }}-pods-${{ hashFiles('ios/Podfile.lock') }}
       - name: install Cocoapod dependencies
         run: |
              cd ios
              pod install
              
-             
-
       - name: build archive
         run: |
              cd ios
