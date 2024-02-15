@@ -13,6 +13,11 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+          cache-dependency-path: ./package-lock.json
       - name: Install the Apple certificate and provisioning profile
         id: profile
         env:
@@ -47,13 +52,8 @@ jobs:
       - uses: nickwph/apple-provisioning-profile-action@v1
         with:
           profile-base64:  ${{ secrets.BUILD_PROVISION_PROFILE_BASE64 }}
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: 'npm'
-          cache-dependency-path: ./package-lock.json
           
-      - name: npm Yarn Install
+      - name: npm Install
         run: |
              npm install
       - name: Cache Pods
