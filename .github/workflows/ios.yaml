@@ -106,7 +106,7 @@ jobs:
           path: ${{ runner.temp }}/build/Apps/bps.ipa
           retention-days: 3
   distribute-ios:
-    needs: build_with_signing # This is important
+    needs: build_with_signing
     runs-on: ubuntu-latest
 
     steps:
