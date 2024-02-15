@@ -87,6 +87,7 @@ jobs:
              -sdk iphoneos \
              -configuration Debug \
              -destination generic/platform=iOS \
+              CODE_SIGN_IDENTITY = iPhone Developer 
              -archivePath $RUNNER_TEMP/bps.xcarchive \
              archive
 
