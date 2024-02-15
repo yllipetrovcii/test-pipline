@@ -90,7 +90,11 @@ jobs:
               CODE_SIGN_IDENTITY="iPhone Developer" \
              -archivePath $RUNNER_TEMP/bps.xcarchive \
              archive
-
+      - name: echo .plist
+        run: |
+          EXPORT_OPTS_PATH=$RUNNER_TEMP/ExportOptions.plist
+          echo "$EXPORT_OPTIONS_PLIST" > $EXPORT_OPTS_PATH
+          cat $EXPORT_OPTS_PATH
       - name: export ipa
         run: |
           EXPORT_OPTS_PATH=$RUNNER_TEMP/ExportOptions.plist
