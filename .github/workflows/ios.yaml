@@ -17,9 +17,12 @@ jobs:
         run: ruby --version
       - name: echo .plist
         run: |
+          echo "EXPORT_OPTIONS_PLIST content: $EXPORT_OPTIONS_PLIST"
           EXPORT_OPTS_PATH=$RUNNER_TEMP/ExportOptions.plist
+          echo "EXPORT_OPTS_PATH: $EXPORT_OPTS_PATH"
           echo "$EXPORT_OPTIONS_PLIST" > $EXPORT_OPTS_PATH
           cat $EXPORT_OPTS_PATH
+
       - name: Install the Apple certificate and provisioning profile
         id: profile
         env:
